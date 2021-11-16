@@ -1,8 +1,7 @@
-package com.bnc.fetest.koinDI
+package com.test.enigma.koin
 
 import com.google.gson.GsonBuilder
-import com.bnc.fetest.dagger.module.HEAD_URL
-import com.bnc.fetest.retrofit.ApiService
+import com.test.enigma.util.HEAD_URL
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module

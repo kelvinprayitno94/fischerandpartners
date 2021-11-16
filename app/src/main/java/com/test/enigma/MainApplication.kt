@@ -1,7 +1,7 @@
 package com.test.enigma
 
 import android.app.Application
-import com.bnc.fetest.koinDI.networkModule
+import com.test.enigma.koin.networkModule
 import com.test.enigma.koin.apiRepoContractModule
 import com.test.enigma.koin.viewControllerModule
 import timber.log.Timber

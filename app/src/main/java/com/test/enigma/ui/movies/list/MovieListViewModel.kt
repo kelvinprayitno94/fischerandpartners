@@ -1,27 +1,28 @@
-package com.test.enigma.ui.movies.category
+package com.test.enigma.ui.movies.list
 
 import androidx.lifecycle.MutableLiveData
 import com.test.enigma.base.BaseViewModel
 import com.test.enigma.koin.ApiRepoContract
 import com.test.enigma.model.MovieCategoryResponse
+import com.test.enigma.model.MovieListResponse
 import com.test.enigma.util.ViewStateModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class MovieCategoriesViewModel(
+class MovieListViewModel(
     private val apiRepoContract: ApiRepoContract
 ): BaseViewModel() {
-    val movieCategoryLiveData: MutableLiveData<MovieCategoryResponse> = MutableLiveData()
+    val movieListLiveData: MutableLiveData<MovieListResponse> = MutableLiveData()
 
-    fun getMovieCategory() {
+    fun getMovieList(id: Int) {
         viewStateLiveData.value = ViewStateModel.SUCCESS
 
-        apiRepoContract.getMovieCategories()
+        apiRepoContract.getMovieList(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    movieCategoryLiveData.postValue(it)
+                    movieListLiveData.postValue(it)
 
                     viewStateLiveData.value = ViewStateModel.SUCCESS
                 },

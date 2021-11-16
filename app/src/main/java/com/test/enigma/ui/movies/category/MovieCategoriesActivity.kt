@@ -37,7 +37,7 @@ class MovieCategoriesActivity : BaseKoinActivityBinding<ActivityMovieCategoryBin
     }
 
     private fun initObserver() {
-        movieCategoriesViewModel.eventDetailLiveData.observe(this@MovieCategoriesActivity)
+        movieCategoriesViewModel.movieCategoryLiveData.observe(this@MovieCategoriesActivity)
         {
             movieCategoryAdapter.updateList(it.genres)
         }
