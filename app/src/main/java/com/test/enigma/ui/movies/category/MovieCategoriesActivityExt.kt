@@ -1,7 +1,7 @@
 package com.test.enigma.ui.movies.category
 
 import androidx.recyclerview.widget.LinearLayoutManager
-import kotlinx.android.synthetic.main.activity_movie_list.*
+import kotlinx.android.synthetic.main.activity_movie_category.*
 
 fun MovieCategoriesActivity.setupRecyclerView() {
     recyclerViewMovieCategory.run {

@@ -1,11 +1,13 @@
 package com.test.enigma.ui.movies.list
 
+import android.content.Intent
 import android.view.LayoutInflater
 import com.test.enigma.base.BaseKoinActivityBinding
 import com.test.enigma.base.setGone
 import com.test.enigma.base.setVisible
 import com.test.enigma.databinding.ActivityMovieListBinding
 import com.test.enigma.model.MovieItems
+import com.test.enigma.ui.movies.detail.MovieDetailActivity
 import com.test.enigma.util.ID_ARGS
 import com.test.enigma.util.ViewStateModel
 import kotlinx.android.synthetic.main.activity_movie_list.*
@@ -60,6 +62,8 @@ class MovieListActivity : BaseKoinActivityBinding<ActivityMovieListBinding>(), M
     }
 
     override fun onMovieListClick(item: MovieItems) {
-
+        val intent = Intent(this@MovieListActivity, MovieDetailActivity::class.java)
+        intent.putExtra(ID_ARGS, item.id)
+        startActivity(intent)
     }
 }

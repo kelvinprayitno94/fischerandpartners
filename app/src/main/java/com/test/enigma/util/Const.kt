@@ -1,6 +1,7 @@
 package com.test.enigma.util
 
 const val HEAD_URL = "https://api.themoviedb.org/"
+const val IMAGE_URL = "https://image.tmdb.org/t/p/original"
 const val LANG = "en-US"
 
 const val API_KEY = "18dbd5db742815562e81a1d3c234a312"

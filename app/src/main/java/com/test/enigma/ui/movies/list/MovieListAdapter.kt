@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.test.enigma.R
+import com.test.enigma.base.loadImageUrl
 import com.test.enigma.model.MovieItems
 import com.test.enigma.util.HEAD_URL
+import com.test.enigma.util.IMAGE_URL
 import kotlinx.android.synthetic.main.adapter_movie_list.view.*
 
 interface MovieListListener {
@@ -49,10 +51,7 @@ class MovieListAdapter(
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(context: Context, item: MovieItems, movieCategoryListener: MovieListListener) {
-            Glide.with(context)
-                .load("${HEAD_URL}${item.posterPath}")
-                .error(R.drawable.ic_image_not_found)
-                .into(itemView.textViewMovieListPoster)
+            itemView.textViewMovieListPoster.loadImageUrl(item.posterPath, context)
             itemView.textViewMovieListTitle.text = item.title
             itemView.textViewMovieListOverview.text = item.overview
             itemView.textViewMovieListReleaseDate.text = item.releaseDate

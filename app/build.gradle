@@ -40,6 +40,7 @@ android {
 
 dependencies {
 
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
     def koin_version = "3.1.3"
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -51,6 +52,9 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    //youtube player
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
+
 
     //preference
     implementation 'androidx.preference:preference-ktx:1.1.1'
@@ -63,7 +67,7 @@ dependencies {
 
     //koin
     implementation "io.insert-koin:koin-android:$koin_version"
-    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
+//    implementation "io.insert-koin:koin-android-viewmodel:$koin_version"
     // Testing
     testImplementation "io.insert-koin:koin-test:$koin_version"
     testImplementation "io.insert-koin:koin-test-junit4:$koin_version"
