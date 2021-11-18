@@ -2,6 +2,7 @@ package com.test.enigma.ui.movies.category
 
 import android.content.Intent
 import android.view.LayoutInflater
+import android.widget.Toast
 import com.test.enigma.base.BaseKoinActivityBinding
 import com.test.enigma.base.setGone
 import com.test.enigma.base.setVisible
@@ -14,7 +15,8 @@ import kotlinx.android.synthetic.main.activity_movie_category.*
 import org.koin.android.ext.android.inject
 import org.koin.core.parameter.parametersOf
 
-class MovieCategoriesActivity : BaseKoinActivityBinding<ActivityMovieCategoryBinding>(), MovieCategoryListener {
+class MovieCategoriesActivity : BaseKoinActivityBinding<ActivityMovieCategoryBinding>(),
+    MovieCategoryListener {
     private val movieCategoriesViewModel: MovieCategoriesViewModel by inject {
         parametersOf(this)
     }
@@ -44,7 +46,7 @@ class MovieCategoriesActivity : BaseKoinActivityBinding<ActivityMovieCategoryBin
 
         movieCategoriesViewModel.viewStateLiveData.observe(this@MovieCategoriesActivity)
         {
-            when(it){
+            when (it) {
                 ViewStateModel.LOADING -> {
                     progressBarMovieCategory.setVisible()
                 }

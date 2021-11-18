@@ -2,6 +2,7 @@ package com.test.enigma.ui.movies.detail
 
 import android.view.LayoutInflater
 import android.view.View
+import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
@@ -26,7 +27,7 @@ class MovieDetailActivity : BaseKoinActivityBinding<ActivityMovieDetailBinding>(
         parametersOf(this)
     }
 
-    private val movieReviewAdapter: MovieReviewAdapter by inject{
+    private val movieReviewAdapter: MovieReviewAdapter by inject {
         parametersOf(this)
     }
 
@@ -63,9 +64,9 @@ class MovieDetailActivity : BaseKoinActivityBinding<ActivityMovieDetailBinding>(
             binding.imageViewMovieDetailPoster.loadImageUrl(it.posterPath, this@MovieDetailActivity)
             binding.textViewMovieDetailName.text = it.title
             binding.textViewMovieDetailGenres.text = it.genres.toString()
-            binding.textViewMovieDetailOverview.text= it.overview
-            binding.textViewMovieDetailReleaseDate.text= it.releaseDate
-            binding.textViewMovieDetailRuntime.text= "${it.runtime} Minutes"
+            binding.textViewMovieDetailOverview.text = it.overview
+            binding.textViewMovieDetailReleaseDate.text = it.releaseDate
+            binding.textViewMovieDetailRuntime.text = "${it.runtime} Minutes"
         }
 
         movieDetailViewModel.movieVideoLiveData.observe(this@MovieDetailActivity)
@@ -81,10 +82,10 @@ class MovieDetailActivity : BaseKoinActivityBinding<ActivityMovieDetailBinding>(
 
         movieDetailViewModel.movieReviewLiveData.observe(this@MovieDetailActivity)
         {
-            if (page > 1){
+            if (page > 1) {
                 movieReviewAdapter.addList(it.results)
-            }else
-            movieReviewAdapter.updateList(it.results)
+            } else
+                movieReviewAdapter.updateList(it.results)
 
             page += 1
         }
@@ -97,6 +98,14 @@ class MovieDetailActivity : BaseKoinActivityBinding<ActivityMovieDetailBinding>(
                 }
                 ViewStateModel.FAILED -> {
                     progressBarMovieList.setGone()
+
+                    Toast.makeText(
+                        this@MovieDetailActivity,
+                        "Informasi film tidak tersedia",
+                        Toast.LENGTH_SHORT
+                    ).show()
+
+                    finish()
                 }
                 ViewStateModel.SUCCESS -> {
                     progressBarMovieList.setGone()
