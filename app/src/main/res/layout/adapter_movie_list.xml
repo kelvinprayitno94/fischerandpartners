@@ -18,7 +18,7 @@
         <ImageView
             android:id="@+id/textViewMovieListPoster"
             android:layout_width="100dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,6 +39,7 @@
             android:id="@+id/textViewMovieListOverview"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/black"
             android:textSize="14sp"
@@ -52,6 +53,7 @@
             android:id="@+id/textViewMovieListReleaseDate"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:visibility="gone"
             android:layout_marginTop="10dp"
             android:textColor="@android:color/darker_gray"
             android:textSize="12sp"

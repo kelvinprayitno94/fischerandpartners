@@ -14,21 +14,25 @@ class MovieListViewModel(
 ): BaseViewModel() {
     val movieListLiveData: MutableLiveData<MovieListResponse> = MutableLiveData()
 
-    fun getMovieList(id: Int) {
-        viewStateLiveData.value = ViewStateModel.SUCCESS
+    fun getMovieList(id: Int, page: Int) {
 
-        apiRepoContract.getMovieList(id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe(
-                {
-                    movieListLiveData.postValue(it)
+        if (viewStateLiveData.value != ViewStateModel.LOADING) {
 
-                    viewStateLiveData.value = ViewStateModel.SUCCESS
-                },
-                {
-                    viewStateLiveData.value = ViewStateModel.FAILED
-                }
-            ).addToDisposable()
+            viewStateLiveData.value = ViewStateModel.LOADING
+
+            apiRepoContract.getMovieList(id, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        movieListLiveData.postValue(it)
+
+                        viewStateLiveData.value = ViewStateModel.SUCCESS
+                    },
+                    {
+                        viewStateLiveData.value = ViewStateModel.FAILED
+                    }
+                ).addToDisposable()
+        }
     }
 }

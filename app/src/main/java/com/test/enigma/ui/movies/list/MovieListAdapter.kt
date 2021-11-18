@@ -5,16 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.test.enigma.R
 import com.test.enigma.base.loadImageUrl
-import com.test.enigma.model.MovieItems
-import com.test.enigma.util.HEAD_URL
-import com.test.enigma.util.IMAGE_URL
+import com.test.enigma.model.MovieResults
 import kotlinx.android.synthetic.main.adapter_movie_list.view.*
 
 interface MovieListListener {
-    fun onMovieListClick(item: MovieItems)
+    fun onMovieListClick(item: MovieResults)
 }
 
 class MovieListAdapter(
@@ -22,10 +19,16 @@ class MovieListAdapter(
     private val movieCategoryListener: MovieListListener
 ) :
     RecyclerView.Adapter<MovieListAdapter.ViewHolder>() {
-    var list: MutableList<MovieItems> = arrayListOf()
+    var list: MutableList<MovieResults> = arrayListOf()
 
-    fun updateList(_list: List<MovieItems>) {
+    fun updateList(_list: List<MovieResults>) {
         list.clear()
+        list.addAll(_list)
+
+        notifyDataSetChanged()
+    }
+
+    fun addList(_list: List<MovieResults>) {
         list.addAll(_list)
 
         notifyDataSetChanged()
@@ -37,7 +40,7 @@ class MovieListAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.adapter_movie_category, parent, false)
+            .inflate(R.layout.adapter_movie_list, parent, false)
         return ViewHolder(view)
     }
 
@@ -50,11 +53,11 @@ class MovieListAdapter(
     }
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(context: Context, item: MovieItems, movieCategoryListener: MovieListListener) {
+        fun bind(context: Context, item: MovieResults, movieCategoryListener: MovieListListener) {
             itemView.textViewMovieListPoster.loadImageUrl(item.posterPath, context)
-            itemView.textViewMovieListTitle.text = item.title
-            itemView.textViewMovieListOverview.text = item.overview
-            itemView.textViewMovieListReleaseDate.text = item.releaseDate
+            itemView.textViewMovieListTitle.text = item.name
+//            itemView.textViewMovieListOverview.text = item.overview
+//            itemView.textViewMovieListReleaseDate.text = item.releaseDate
 
             itemView.setOnClickListener {
                 movieCategoryListener.onMovieListClick(item)

@@ -4,6 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import com.test.enigma.base.BaseViewModel
 import com.test.enigma.koin.ApiRepoContract
 import com.test.enigma.model.MovieDetailResponse
+import com.test.enigma.model.MovieReviewResponse
 import com.test.enigma.model.MovieVideoResponse
 import com.test.enigma.util.ViewStateModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -14,11 +15,15 @@ class MovieDetailViewModel(
 ) : BaseViewModel() {
     val movieDetailLiveData: MutableLiveData<MovieDetailResponse> = MutableLiveData()
     val movieVideoLiveData: MutableLiveData<MovieVideoResponse> = MutableLiveData()
+    val movieReviewLiveData: MutableLiveData<MovieReviewResponse> = MutableLiveData()
+
+    private var isLoadReview = false
+    private var totalPages = 1
 
     fun getMovieDetail(id: Int) {
         viewStateLiveData.value = ViewStateModel.SUCCESS
 
-        apiRepoContract.getMovieDetail(490132)
+        apiRepoContract.getMovieDetail(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -35,7 +40,7 @@ class MovieDetailViewModel(
 
     fun getMovieVideo(id: Int) {
 
-        apiRepoContract.getMovieVideo(490132)
+        apiRepoContract.getMovieVideo(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
@@ -45,5 +50,26 @@ class MovieDetailViewModel(
                 {
                 }
             ).addToDisposable()
+    }
+
+    fun getMovieReview(page: Int, id: Int) {
+
+        if (!isLoadReview && page <= totalPages) {
+            isLoadReview = true
+
+            apiRepoContract.getMovieReview(id, page)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        movieReviewLiveData.value = it
+                        totalPages = it.totalPages
+                        isLoadReview = false
+                    },
+                    {
+                        isLoadReview = false
+                    }
+                ).addToDisposable()
+        }
     }
 }

@@ -1,9 +1,6 @@
 package com.test.enigma.koin
 
-import com.test.enigma.model.MovieCategoryResponse
-import com.test.enigma.model.MovieDetailResponse
-import com.test.enigma.model.MovieListResponse
-import com.test.enigma.model.MovieVideoResponse
+import com.test.enigma.model.*
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -15,11 +12,12 @@ interface ApiService {
         @Query("api_key") apiKey: String
     ): Single<MovieCategoryResponse>
 
-    @GET("3/list/{id}")
+    @GET("3/movie/{id}/lists")
     fun getMovieList(
         @Path("id") id: Int,
         @Query("api_key") apiKey: String,
-        @Query("language") language: String
+        @Query("language") language: String,
+        @Query("page") page: Int
     ): Single<MovieListResponse>
 
     @GET("3/movie/{id}")
@@ -35,4 +33,12 @@ interface ApiService {
         @Query("api_key") apiKey: String,
         @Query("language") language: String
     ): Single<MovieVideoResponse>
+
+    @GET("3/movie/{id}/reviews")
+    fun getMovieReview(
+        @Path("id") id: Int,
+        @Query("api_key") apiKey: String,
+        @Query("language") language: String,
+        @Query("page") page: Int
+    ): Single<MovieReviewResponse>
 }

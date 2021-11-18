@@ -10,16 +10,8 @@
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/Theme.FischerPartners" >
-        <activity android:name=".ui.movies.list.MovieListActivity"
-            android:exported="true">
-<!--            <intent-filter>-->
-<!--                <action android:name="android.intent.action.MAIN" />-->
-
-<!--                <category android:name="android.intent.category.LAUNCHER" />-->
-<!--            </intent-filter>-->
-        </activity>
-        <activity android:name=".ui.movies.category.MovieCategoriesActivity" />
-        <activity android:name=".ui.movies.detail.MovieDetailActivity"
+        <activity android:name=".ui.movies.list.MovieListActivity"/>
+        <activity android:name=".ui.movies.category.MovieCategoriesActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".ui.movies.detail.MovieDetailActivity"/>
     </application>
 
 </manifest>

@@ -7,6 +7,6 @@ fun MovieCategoriesActivity.setupRecyclerView() {
     recyclerViewMovieCategory.run {
         adapter = movieCategoryAdapter
         layoutManager =
-            LinearLayoutManager(this@setupRecyclerView, LinearLayoutManager.HORIZONTAL, false)
+            LinearLayoutManager(this@setupRecyclerView, LinearLayoutManager.VERTICAL, false)
     }
 }

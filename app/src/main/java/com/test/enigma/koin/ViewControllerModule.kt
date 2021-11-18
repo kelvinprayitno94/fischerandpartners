@@ -5,6 +5,7 @@ import com.test.enigma.ui.movies.category.MovieCategoriesViewModel
 import com.test.enigma.ui.movies.category.MovieCategoryAdapter
 import com.test.enigma.ui.movies.detail.MovieDetailActivity
 import com.test.enigma.ui.movies.detail.MovieDetailViewModel
+import com.test.enigma.ui.movies.detail.MovieReviewAdapter
 import com.test.enigma.ui.movies.list.MovieListActivity
 import com.test.enigma.ui.movies.list.MovieListAdapter
 import com.test.enigma.ui.movies.list.MovieListViewModel
@@ -41,6 +42,11 @@ val viewControllerModule = module {
         scoped {
             MovieDetailViewModel(
                 apiRepoContract = get()
+            )
+        }
+        scoped {
+            MovieReviewAdapter(
+                androidContext()
             )
         }
     }
